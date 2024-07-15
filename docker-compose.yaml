@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  dev-database:
+    image: postgres:16.3
+    container_name: dev-database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Abc123456789 
+      POSTGRES_DB: testdb
+    networks:
+      - nestjs-network
+  # create another container for 'test-database'
+  test-database:
+    image: postgres:16.3
+    container_name: test-database
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Abc123456789 
+      POSTGRES_DB: testdb
+    networks:
+      - nestjs-network
+networks:
+  nestjs-network:
